@@ -1,3 +1,5 @@
+
+
 <!-- App -->
 
 <App>
@@ -7,9 +9,9 @@
 		<TimeMinutesSelector name="startPeriod"></TimeMinutesSelector>
 		<TimeMinutesSelector name="endPeriod"></TimeMinutesSelector>
 	</Group>
+	<WeekDaysSchedule></WeekDaysSchedule>
 	<EnableToggle></EnableToggle>
-	<!-- Show count alarms after toggle -->
-	<!-- TODO: schedule -->
+	<!-- Show alarms count after toggle -->
 </App>
 
 
@@ -34,18 +36,19 @@ StateConfig: {
 	enable: boolean,
 	count: {
 		isRandom: boolean,
-		value: number,
+		value: number [AppConfig.minAlarmsCount - AppConfig.maxAlarmsCount],
 		minValue: number [AppConfig.minAlarmsCount - min(AppConfig.maxAlarmsCount, this.maxValue)],
 		maxValue: number [max(AppConfig.minAlarmsCount, this.minValue) - AppConfig.maxAlarmsCount]
 	},
 	breakSeconds: {
 		isRandom: boolean,
-		value: number,
+		value: number [AppConfig.minBreakTime - AppConfig.maxBreakTime],
 		minValue: [AppConfig.minBreakTime - min(AppConfig.maxBreakTime, this.maxValue)],
 		maxValue: number [max(AppConfig.minBreakTime, this.minValue) - AppConfig.maxBreakTime]
 	},
-	startPeriod: number,
-	endPeriod: number
+	startPeriod: number [0, 24 * 60 * 60 -1],
+	endPeriod: number [0, 24 * 60 * 60 -1],
+	weekDays: array<number [0 - 6]>
 }
 
 
